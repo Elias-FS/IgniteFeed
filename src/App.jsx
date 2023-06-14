@@ -1,10 +1,45 @@
 import { Header } from "./components/Header";
+import { Post } from "./components/Post";
+import { Sidebar } from "./components/Sidebar";
 
 import styles from './App.module.css';
 
 import './global.css'
-import { Post } from "./Post";
-import { Sidebar } from "./components/Sidebar";
+
+// author: { avatar_url: "", name: "", role: ""}
+// publisgedAt: Date
+// content: String
+
+const posts = [
+  {
+    id: 1,
+    author: {
+      avatarUrl: 'https://github.com/Elias-FS.png',
+      name: 'Elias Fausto',
+      role: 'Estagiário Ful Stack @BTG'
+    },
+    content: [
+      { type: 'paragraph', content: 'Fala galera 👋', },
+      { type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifólio. É um projeto que fiz no Ignite da Rocketseat.' },
+      { type: 'link', content: 'https://github.com/Elias-FS/IgniteFeed'}
+    ],
+    publishedAt: new Date('2023-06-13 16:00:00'),
+  },
+  {
+    id: 2,
+    author: {
+      avatarUrl: 'https://github.com/diego3g.png',
+      name: 'Diego Fernandes',
+      role: 'CTO @Rocketseat'
+    },
+    content: [
+      { type: 'paragraph', content: 'Fala galera 👋', },
+      { type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifólio. É um projeto que fiz no Ignite da Rocketseat.' },
+      { type: 'link', content: 'https://github.com/Elias-FS/IgniteFeed'}
+    ],
+    publishedAt: new Date('2023-06-10 13:50:00'),
+  }
+]
 
 export function App() {
   return (
@@ -14,14 +49,16 @@ export function App() {
       <div className={styles.wraper}>
         <Sidebar />
         <main>
-          <Post 
-            author="Elias Fausto"
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque asperiores impedit ab. Eum voluptas labore eius impedit nulla quaerat sed velit? Suscipit pariatur magni tenetur, eaque neque unde fugit reiciendis."
-          />
-          <Post 
-            author="Jonas Fausto"
-            content="Um novo post muito legal!"
-          />
+          {posts.map(post => {
+            return (
+              <Post
+                key={post.id}
+                author={post.author}
+                content={post.content}
+                publishedAt={post.publishedAt}
+              />
+            )
+          })}
         </main>
       </div>
     </div>
